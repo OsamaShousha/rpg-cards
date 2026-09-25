@@ -44,9 +44,9 @@ function App() {
       </button>
 
       <ul>
-        <li>{todos[0]}</li>
-        <li>{todos[1]}</li>
-        <li>{todos[2]}</li>
+        {todos.map(function (todo) {
+          return <li key={todo}>{todo}</li>;
+        })}
       </ul>
     </main>
   );
