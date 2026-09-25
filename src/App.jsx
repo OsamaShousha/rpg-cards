@@ -4,12 +4,10 @@ function App() {
   const [todos, setTodos] = useState([
     "Lära useState",
     "Se re-render",
-    "Exam 2 senare",
+    "Ta helg kl 16",
   ]);
 
   const [draft, setDraft] = useState("");
-
-  console.log(todos);
 
   function handleChange(e) {
     setDraft(e.target.value);
@@ -21,50 +19,35 @@ function App() {
     if (text === "") return;
 
     setTodos([...todos, text]);
-
     setDraft("");
   }
 
-  function handleClear() {
-    setDraft("");
+  function handleRemove(textToRemove) {
+    setTodos(todos.filter((todo) => todo !== textToRemove));
   }
 
   return (
     <main>
-      <h1>Övnings-todo</h1>
+      <h1>Min Todo-app</h1>
 
       <p>Antal uppgifter: {todos.length}</p>
-
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo}>{todo}</li>
-        ))}
-      </ul>
 
       <input
         type="text"
         value={draft}
         onChange={handleChange}
-        placeholder="Skriv uppgift..."
+        placeholder="Ny uppgift"
       />
 
-      <p>Kladd just nu: {draft}</p>
-
       <button type="button" onClick={handleAdd}>
         Lägg till
       </button>
 
-      <button type="button" onClick={handleClear}>
-        Rensa
-      </button>
-
-      <button type="button" onClick={handleAdd}>
-        Lägg till
-      </button>
-
-      <button type="button" onClick={handleClear}>
-        Rensa
-      </button>
+      <ul>
+        <li>{todos[0]}</li>
+        <li>{todos[1]}</li>
+        <li>{todos[2]}</li>
+      </ul>
     </main>
   );
 }
