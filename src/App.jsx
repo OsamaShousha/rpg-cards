@@ -29,23 +29,31 @@ function App() {
   return (
     <main>
       <h1>Min Todo-app</h1>
-
       <p>Antal uppgifter: {todos.length}</p>
-
       <input
         type="text"
         value={draft}
         onChange={handleChange}
         placeholder="Ny uppgift"
       />
-
       <button type="button" onClick={handleAdd}>
         Lägg till
       </button>
-
       <ul>
         {todos.map(function (todo) {
-          return <li key={todo}>{todo}</li>;
+          return (
+            <li key={todo}>
+              {todo}{" "}
+              <button
+                type="button"
+                onClick={function () {
+                  handleRemove(todo);
+                }}
+              >
+                Ta bort
+              </button>
+            </li>
+          );
         })}
       </ul>
     </main>
