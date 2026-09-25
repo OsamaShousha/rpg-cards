@@ -1,60 +1,72 @@
-import "./App.css";
+import { useState } from "react";
 
-// 1. KORT-MALLEN (Komponenten)
-function calculatePower(level, hp) {
-  return level * 10 + hp;
-}
+function App() {
+  const [todos, setTodos] = useState([
+    "Lära useState",
+    "Se re-render",
+    "Exam 2 senare",
+  ]);
 
-function CharacterCard(props) {
-  const hero = props.character;
-  if (hero.hp <= 0) {
-  return (
-    <article className="card fallen">
-      <h2>{hero.name}</h2>
-      <p>FALLEN I STRID</p>
-    </article>
-  );
-}
-  const power = calculatePower(hero.level, hero.hp);
-let veteranText = "";
+  const [draft, setDraft] = useState("");
 
-  if (hero.level >= 10) {
-    veteranText = " ★ Veteran";
+  console.log(todos);
+
+  function handleChange(e) {
+    setDraft(e.target.value);
+  }
+
+  function handleAdd() {
+    const text = draft.trim();
+
+    if (text === "") return;
+
+    setTodos([...todos, text]);
+
+    setDraft("");
+  }
+
+  function handleClear() {
+    setDraft("");
   }
 
   return (
-    <article className="card">
-      <h2>{hero.name}{veteranText}</h2>
-      <p>Roll: {hero.role}</p>
-      <p>HP: {hero.hp}</p>
-      <p>Level: {hero.level}</p>
-       <p>Attackstyrka: {power}</p>
-    </article>
-  );
-}
-
-// 2. HUVUDSIDAN
-export default function App() {
-  const guild = [
-    { name: "Nova", role: "Mage", hp: 80, level: 5 },
-    { name: "Kael", role: "Warrior", hp: 140, level: 12 },
-    { name: "Lyra", role: "Rogue", hp: 0, level: 4 },
-    { name: "Theron", role: "Paladin", hp: 110, level: 3 }
-  ];
-
-  return (
     <main>
-      <h1>RPG Guild Dashboard</h1>
+      <h1>Övnings-todo</h1>
 
+      <p>Antal uppgifter: {todos.length}</p>
 
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo}>{todo}</li>
+        ))}
+      </ul>
 
-<div className="guild-grid">
-  <CharacterCard character={guild[0]} />
-  <CharacterCard character={guild[1]} />
-  <CharacterCard character={guild[2]} />
-  <CharacterCard character={guild[3]} />
-</div>
+      <input
+        type="text"
+        value={draft}
+        onChange={handleChange}
+        placeholder="Skriv uppgift..."
+      />
 
+      <p>Kladd just nu: {draft}</p>
+
+      <button type="button" onClick={handleAdd}>
+        Lägg till
+      </button>
+
+      <button type="button" onClick={handleClear}>
+        Rensa
+      </button>
+
+      <button type="button" onClick={handleAdd}>
+        Lägg till
+      </button>
+
+      <button type="button" onClick={handleClear}>
+        Rensa
+      </button>
     </main>
   );
 }
+
+export default App;
