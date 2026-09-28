@@ -1,0 +1,22 @@
+*, *::after, *::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contaner{
+    margin: 2rem auto;
+    width: 400px;
+    height: 400px;
+   background: linear-gradient(#FFDBB0,#FCF9EA);
+   text-align: center;
+   padding-top: 6rem;
+   color: black;
+
+}
+
+.minusBtn, .plusBtn{
+      width: 80px;
+      height: 30px;
+      
+}
